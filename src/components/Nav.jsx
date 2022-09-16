@@ -18,7 +18,7 @@ export default function Nav({ username }){
 
     return (
         <nav className="p-4 md:py-8 xl:px-0 md:container md:mx-w-6xl md:mx-auto">
-        <div className="hidden lg:flex lg:justify-between lg:items-center">
+        <div className="flex justify-between items-center">
             <a href="/" className="flex items-start gap-2 group">
                 <div className="bg-blue-600 text-white p-2 rounded-md group-hover:bg-blue-800">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -30,7 +30,7 @@ export default function Nav({ username }){
                 <p className="text-sm font-light uppercase text-gray-300">
                     Powered by X-Panel
                     <span className="text-base block font-bold tracking-widest">
-                        {siteName}
+                    {siteName}
                     </span>
                 </p>
             </a>
@@ -39,7 +39,7 @@ export default function Nav({ username }){
                 <li><a href="/asdf" className="px-2 xl:px-4 py-2 text-gray-300 rounded-md hover:bg-gray-600">Purchase Coins</a></li>
                 <li><a href="/account" className="px-2 xl:px-4 py-2 text-gray-300 rounded-md hover:bg-gray-600">Account Settings</a></li>
                 <li><a href="/support" className="px-2 xl:px-4 py-2 text-gray-300 rounded-md hover:bg-gray-600">Help Desk</a></li>
-                <li><a href="/web-hosting" className="px-2 xl:px-4 py-2 text-gray-300 rounded-md hover:bg-gray-600">Web Hosting</a></li>
+                <li><a href="/web-hosting" className='px-2 xl:px-4 py-2 text-gray-300 rounded-md hover:bg-gray-600'>Web Hosting</a><span className="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Exclusive!</span></li>
             </ul>
             <ul className="flex items-center gap-6">
                 <li>

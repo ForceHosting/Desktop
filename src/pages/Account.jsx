@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Nav from 'components/Nav';
+import Nav from '../components/Nav';
 import { useNavigate } from "react-router-dom";
-import { siteName } from "config";
-import MinecraftBackground from 'assets/minecraft-img.jpg';
+import { siteName } from "../config";
+import MinecraftBackground from '../assets/minecraft-img.jpg';
 import axios from "axios";
 import {Buffer} from 'buffer';
-import { generateDiscordLinkIdRoute } from "utils/APIRoutes";
+import { generateDiscordLinkIdRoute } from "../utils/APIRoutes";
 
 export default function Account(currentUser, socket) {
 

@@ -4,16 +4,16 @@ import { io } from "socket.io-client";
 import { serverIP } from 'config';
 import Login from "./pages/Login";
 import Main from "./pages/Main";
-import NotFound from 'pages/NotFound';
-import Register from 'pages/Register';
-import CreateServer from 'pages/CreateServer';
-import NewTicket from 'pages/Tickets/NewTicket';
-import Payment from 'pages/Payment';
-import Account from 'pages/Account';
-import Ticket from 'pages/Tickets/Ticket';
-import ToS from 'pages/Legal/ToS';
-import PrivacyPolicy from 'pages/Legal/PrivacyPolicy';
-import WebHosting from 'pages/WebHosting';
+import NotFound from './pages/NotFound';
+import Register from './pages/Register';
+import CreateServer from './pages/CreateServer';
+import NewTicket from './pages/Tickets/NewTicket';
+import Payment from './pages/Payment';
+import Account from './pages/Account';
+import Ticket from './pages/Tickets/Ticket';
+import ToS from './pages/Legal/ToS';
+import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
+import WebHosting from './pages/WebHosting';
 
 
 function App() {

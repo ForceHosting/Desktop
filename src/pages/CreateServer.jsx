@@ -57,7 +57,6 @@ const handleChange = (event) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { name, location, software, memory, cpu, disk } = values;
-          
           const { data } = await axios.post(addToQueueRoute, {
             userUid,
             name,
@@ -71,9 +70,9 @@ const handleChange = (event) => {
           if (data.added === false) {
             toast.error(data.msg, toastOptions);
           }
-          if (data.status === true) {
-            toast.success("Server added to queue!")
-            navigate("/");
+          if (data.added === true) {
+            toast.success("Server created!", toastOptions)
+            setTimeout(() => { navigate("/") }, 8000);
           }
       };
 
@@ -97,7 +96,8 @@ const handleChange = (event) => {
                                         </div>
                                         <div className="col-span-6 sm:col-span-3">
                                             <label htmlFor="location" className="block text-sm font-medium text-gray-300">Server Location</label>
-                                            <select id="location" onChange={(e) => handleChange(e)} name="location" className="mt-1 block w-full py-2 px-3 border  rounded-md border-gray-300 text-white bg-gray-700 shadow-sm focus:outline-none sm:text-sm">
+                                            <select id="location" required onChange={(e) => handleChange(e)} name="location" className="mt-1 block w-full py-2 px-3 border  rounded-md border-gray-300 text-white bg-gray-700 shadow-sm focus:outline-none sm:text-sm">
+                                                <option value="0">Please select a location</option>
                                                 <option value="1">Stormbreaker (Germany)</option>
                                                 <option value="2">Curiosity (Germany)</option>
                                                 <option value="5">Omega (Germany)</option>
@@ -114,7 +114,7 @@ const handleChange = (event) => {
                                                 <option value="4" disabled>Teamspeak3 (Coming Soon!)</option>
                                                 <option value="5">Mumble</option>
                                                 <option value="6">Python</option>
-                                                <option value="7">NodeJS</option>
+                                                <option value="22">NodeJS</option>
                                                 <option value="8">LavaLink</option>
                                             </select>
                                         </div>
@@ -138,7 +138,7 @@ const handleChange = (event) => {
                                         Reset
                                     </button>
                                     <button type="submit" name="submit" className="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Add to Queue
+                                        Create Server
                                     </button>
                                 </div>
                             </div>

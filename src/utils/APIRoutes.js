@@ -1,4 +1,4 @@
-import { serverIP } from '../config';
+import { serverIP } from '../config.js';
 
 export const getUserDataRoute = `${serverIP}/api/auth/getData`;
 export const loginRoute = `${serverIP}/api/auth/login`;
@@ -11,5 +11,7 @@ export const getTicketMessageRoute = `${serverIP}/api/ticket/getmsg`
 export const sendTicketMessageRoute = `${serverIP}/api/ticket/addmsg`
 export const getTicketInformationRoute = `${serverIP}/api/ticket/information`
 export const generateDiscordLinkIdRoute = `${serverIP}/api/auth/link/generate`
+export const deleteServerRoute = `${serverIP}/api/server/delete`
+export const renewServerRoute = `${serverIP}/api/server/renew`
 export const createWebHostingAccountRoute = `${serverIP}/api/webhosting/create`
 export const getWebHostingAccountRoute = `${serverIP}/api/webhosting/get`
