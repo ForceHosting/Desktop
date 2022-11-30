@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, BrowserWindow, remote } = require('electron');
+const { app, BrowserWindow, remote, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 
 
@@ -9,9 +9,12 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
     webPreferences: {
       nodeIntegration: true,
+      preload: isDev
+        ? path.join(app.getAppPath(), './public/preload.js')
+        : path.join(app.getAppPath(), './build/preload.js'),
     },
     
   });
@@ -47,6 +50,7 @@ app.on('activate', () => {
     createWindow();
   }
 });
+console.log(BrowserWindow.getAllWindows())
 
 
 const DiscordRPC = require('discord-rpc')
@@ -57,27 +61,30 @@ DiscordRPC.register(clientId);
 
 const rpc = new DiscordRPC.Client({ transport: 'ipc' });
 
-async function setActivity() {
+async function setActivity(status) {
   // You'll need to have snek_large and snek_small assets uploaded to
   // https://discord.com/developers/applications/<application_id>/rich-presence/assets
   rpc.setActivity({
-    details: `my.forcehost.net`,
-    state: `v2 RC-1`,
+    details: `${status}`,
+    state: `v3 ALPHA`,
     largeImageKey: 'force',
-    largeImageText: 'Force Host DAv2',
+    largeImageText: 'Force Host DAv3',
     instance: false,
+    buttons: [
+      { label: 'Start Hosting Today!', url: 'https://my.forcehost.net'},
+      { label: '🎄Merry Christmas', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
+    ]
   });
 }
 
-rpc.on('ready', () => {
-  setActivity();
-  console.log('one')
+ipcMain.handle('get-web-name', (event, args) => {
+  setActivity(args)
+})
 
-  // activity can only be set every 15 seconds
-  setInterval(() => {
-    console.log('15 seconds')
-    setActivity();
-  }, 15e3);
+rpc.on('ready', () => {
+  setTimeout(() => {
+    setActivity(`Initializing`)}, 5000
+  )
 });
 
 rpc.login({ clientId }).catch(console.error);
