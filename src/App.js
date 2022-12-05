@@ -15,11 +15,9 @@ import MotionLazyContainer from './components/animate/MotionLazyContainer';
 // ----------------------------------------------------------------------
 
 export default function App() {
-  (async function test(){
-    setTimeout(async() => {
-    await window.api.getWebTitle(document.title)
-  }, 5000)
-  })();
+
+    
+
   return (
     
     <MotionLazyContainer>

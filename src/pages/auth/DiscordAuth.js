@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Button, Typography, Container } from '@mui/material';
-import fetch from 'node-fetch';
+import { Typography, Container } from '@mui/material';
 import axios from '../../utils/axios';
 // components
 import Page from '../../components/Page';
@@ -26,24 +25,16 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Authing() {
-
+  const navigate = useNavigate();
 useEffect(()=>{
     (async function getData(){
-      const response = await fetch('http://localhost:25566/api/auth/discord/data', {
-        method: 'GET',
-        headers: {
-          cookie: 'X-Panel_INFO=s%3AkQIKPEvNadujluQX-73kfdFwdJFJBRUa.zHU%2B4b2Y14GxmwH8uF4inMEFhNETPz8OPiubBKgQcKQ'
-        }
-      });
-const body = await response;
-
-console.log(body);
-      document.cookie = `X-Panel_INFO=s%3AOOfB88ISGwLfhkSyygHzTubz3fH3_mXo.N80XjldrAS3bBR%2BJF6i88TwTBNUbFL3Gas8pcL4gEyE`
-    const res = await axios.get('http://localhost:25566/api/auth/discord/data', {
-
-    });
-      console.log(res)
-      //    localStorage.setItem('token', res.data)
+    const res = await axios.get('/api/auth/discord/data');
+    if(res.status === 200){
+      localStorage.setItem('token', res.data)
+      navigate("/app")
+    }else{
+      navigate("/auth/login")
+    }
     })();
 })
 

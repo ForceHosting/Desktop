@@ -1,7 +1,7 @@
 {
-  "name": "Force Host",
+  "name": "dav3",
   "version": "0.1.0",
-  "author": "Force_Hosting",
+  "author": "forcehosting",
   "private": true,
   "main": "electron/electron.js",
   "dependencies": {
@@ -157,9 +157,9 @@
     ]
   },
   "build": {
-    "icon": "force-trans.png",
+    "icon": "force.png",
     "appId": "net.forcehost.desktop",
-    "productName": "Force Host DAv2",
+    "productName": "FHDAv3",
     "publish": {
       "provider": "generic",
       "url": "https://forcehost.net/desktop"

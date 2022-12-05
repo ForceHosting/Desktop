@@ -24,7 +24,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function VerifyCode() {
   return (
-    <Page title="Verifying Account">
+    <Page title="Verify Code">
       <LogoOnlyLayout />
 
       <Container>

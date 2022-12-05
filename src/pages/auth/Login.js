@@ -73,7 +73,7 @@ export default function Login() {
   const mdUp = useResponsive('up', 'md');
 
   return (
-    <Page title="Logging in">
+    <Page title="Logging In">
       <RootStyle>
         <HeaderStyle>
           <Logo />

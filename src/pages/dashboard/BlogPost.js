@@ -35,6 +35,7 @@ export default function BlogPost() {
   const getPost = useCallback(async () => {
     try {
       const response = await axios.get(`/api/dev/post/${title}`);
+      console.log(title)
       if (isMountedRef.current) {
         setPost(response.data[0]);
       }
@@ -49,7 +50,7 @@ export default function BlogPost() {
   }, [getPost]);
 
   return (
-    <Page title="Blog: Post Details">
+    <Page title="Reading An Article">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Post Details"

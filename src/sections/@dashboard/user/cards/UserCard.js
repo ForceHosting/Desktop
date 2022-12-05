@@ -8,14 +8,13 @@ import { deleteServerRoute } from '../../../../utils/APIRoutes';
 import axios from '../../../../utils/axios';
 import cssStyles from '../../../../utils/cssStyles';
 // components
-import Label from '../../../../components/Label';
 import Image from '../../../../components/Image';
 import SvgIconStyle from '../../../../components/SvgIconStyle';
 
 // ----------------------------------------------------------------------
 
 const OverlayStyle = styled('div')(({ theme }) => ({
-  ...cssStyles().bgBlur({ blur: 1, color: theme.palette.primary.darker }),
+  ...cssStyles().bgBlur({ blur: 2, color: theme.palette.primary.darker }),
   top: 0,
   zIndex: 8,
   content: "''",
@@ -34,7 +33,7 @@ UserCard.propTypes = {
 
 
 export default function UserCard({ server, background }) {
-  const { serverName, serverMemory, serverCPU, serverDisk, serverStatus, _id } = server;
+  const { serverName, serverMemory, serverCPU, serverDisk, serverId } = server;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -55,9 +54,7 @@ export default function UserCard({ server, background }) {
 
   return (
     <Card sx={{ textAlign: 'center' }}>
-      
       <Box sx={{ position: 'relative' }}>
-        
         <SvgIconStyle
           src="https://minimal-assets-api-dev.vercel.app/assets/icons/shape-avatar.svg"
           sx={{
@@ -87,12 +84,9 @@ export default function UserCard({ server, background }) {
             position: 'absolute',
           }}
         />
-        
         <OverlayStyle />
         
         <Image src={background} alt={"cover"} ratio="16/9" />
-      
-        
         
       </Box>
       <Typography variant="subtitle1" sx={{ mt: 6 }}>
@@ -100,19 +94,9 @@ export default function UserCard({ server, background }) {
       </Typography>
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-      <Label
-          variant={'filled'}
-          color={
-            (serverStatus === 'Active' && 'success') ||
-            (serverStatus === 'Suspended' && 'warning') ||
-            (serverStatus === 'Deleted' && 'error') ||
-            'default'
-          }
-          sx={{ textTransform: 'capitalize', position: 'relative' }}
-        >
-          {serverStatus}
-        </Label>
+        Id: {serverId}
       </Typography>
+      
       <Button variant="outlined" sx={{ mt: 1}} color="error" onClick={(event) => deleteServer(event, server)}>
   Delete Server
 </Button>

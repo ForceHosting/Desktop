@@ -26,7 +26,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function NewPassword() {
   return (
-    <Page title="Resetting Password">
+    <Page title="New Password">
       <LogoOnlyLayout />
 
       <Container>

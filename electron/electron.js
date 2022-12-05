@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, BrowserWindow, remote, ipcMain } = require('electron');
+const { app, BrowserWindow, autoUpdater, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 
 
@@ -50,7 +50,36 @@ app.on('activate', () => {
     createWindow();
   }
 });
-console.log(BrowserWindow.getAllWindows())
+
+
+const server = `https://fhd-esktop-ltbwwkw9j-the-mg.vercel.app/`
+const url = `${server}/update/${process.platform}/${app.getVersion()}`
+
+autoUpdater.setFeedURL({ url })
+
+setInterval(() => {
+  autoUpdater.checkForUpdates()
+}, 60000)
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail:
+      'A new version has been downloaded. Restart the application to apply the updates.',
+  }
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+})
+
+autoUpdater.on('error', (message) => {
+  console.error('There was a problem updating the application')
+  console.error(message)
+})
 
 
 const DiscordRPC = require('discord-rpc')
@@ -78,13 +107,9 @@ async function setActivity(status) {
 }
 
 ipcMain.handle('get-web-name', (event, args) => {
+  console.log(args)
   setActivity(args)
 })
 
-rpc.on('ready', () => {
-  setTimeout(() => {
-    setActivity(`Initializing`)}, 5000
-  )
-});
 
 rpc.login({ clientId }).catch(console.error);

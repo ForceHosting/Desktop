@@ -6,7 +6,16 @@ import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
+const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => {
+
+  (async function test(){
+    setInterval(async() => {
+    await window.api.getWebTitle(document.title)
+    }, 5000);
+  })();
+
+  return (
+
   <>
     <Helmet>
       <title>{`${title}`}</title>
@@ -17,7 +26,7 @@ const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
       {children}
     </Box>
   </>
-));
+)});
 
 Page.propTypes = {
   children: PropTypes.node.isRequired,
