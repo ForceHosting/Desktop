@@ -1,9 +1,10 @@
 {
   "name": "dav3",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "author": "forcehosting",
   "private": true,
-  "main": "electron/electron.js",
+  "homepage": "./",
+  "main": "public/electron.js",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.22.1",
     "@emoji-mart/data": "^1.0.2",
@@ -34,10 +35,14 @@
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "change-case": "^4.1.2",
+    "cross-env": "^7.0.3",
+    "custom-electron-titlebar": "4.1",
     "d3-array": "^3.1.6",
     "d3-scale": "^4.0.2",
     "date-fns": "^2.28.0",
     "deck.gl": "^8.8.2",
+    "discord-rpc": "^4.0.1",
+    "electron-is-dev": "^2.0.0",
     "emoji-mart": "^5.1.0",
     "firebase": "^9.8.4",
     "framer-motion": "^6.3.16",
@@ -88,11 +93,7 @@
     "stylis-plugin-rtl": "^2.1.1",
     "util": "^0.12.4",
     "web-vitals": "^2.1.4",
-    "yup": "^0.32.11",
-    "cross-env": "^7.0.3",
-    "custom-electron-titlebar": "4.1",
-    "discord-rpc": "^4.0.1",
-    "electron-is-dev": "^2.0.0"
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -101,28 +102,23 @@
     "eject": "react-scripts eject",
     "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
     "dev": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
-    "build-electron-win": "robocopy ./electron ./build/electron /S",
-    "package-win": "electron-builder build --win -c.extraMetadata.main=build/electron/electron.js --publish never",
-    "clean-win": "rmdir build /S /Q & rmdir dist/S /Q"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "electron:package": "npm run react-build && electron-builder -c.extraMetadata.main=build/electron.js"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.8",
-    "concurrently": "^7.3.0",
-    "electron": "^20.1.0",
-    "electron-builder": "^23.3.3",
-    "wait-on": "^6.0.1",
     "@babel/core": "^7.18.6",
     "@babel/eslint-parser": "^7.18.2",
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
     "@svgr/webpack": "^6.2.1",
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
+    "autoprefixer": "^10.4.8",
     "babel-eslint": "^10.1.0",
+    "concurrently": "^7.3.0",
+    "electron": "^20.1.0",
+    "electron-builder": "^23.3.3",
     "eslint": "^8.19.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -134,7 +130,8 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "wait-on": "^6.0.1"
   },
   "overrides": {
     "@svgr/webpack": "^6.2.1"
@@ -142,6 +139,25 @@
   "babel": {
     "presets": [
       "@babel/preset-react"
+    ]
+  },
+  "build": {
+    "extends": null,
+    "appId": "com.example.electron-cra",
+    "files": [
+      "dist/**/*",
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
     ]
   },
   "browserslist": {
@@ -155,48 +171,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "build": {
-    "icon": "force.png",
-    "appId": "net.forcehost.desktop",
-    "productName": "FHDAv3",
-    "publish": {
-      "provider": "generic",
-      "url": "https://forcehost.net/desktop"
-    },
-    "win": {
-      "target": [
-        "nsis",
-        "appx"
-      ],
-      "asar": "false"
-    },
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "darkModeSupport": true,
-      "category": "public.app-category.utilities"
-    },
-    "linux": {
-      "target": [
-        "snap",
-        "AppImage"
-      ],
-      "maintainer": "net.forcehost.desktop",
-      "category": "Hosting",
-      "vendor": "Force Host",
-      "description": "Force Host, start your journey today."
-    },
-    "nsis": {
-      "deleteAppDataOnUninstall": true,
-      "shortcutName": "Force Host DAv2",
-      "displayLanguageSelector": true,
-      "oneClick": false,
-      "allowElevation": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": false
-    }
   }
 }

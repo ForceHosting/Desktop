@@ -1,8 +1,8 @@
 {
-  "name": "React Material Minimal UI",
-  "short_name": "Minimal-UI",
+  "name": "Force Host Desktop",
+  "short_name": "DAv3",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": ".",
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "icons": [
